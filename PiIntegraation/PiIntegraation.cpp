@@ -58,4 +58,9 @@ for (double result : partialResults) {
 auto endTime = chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
 chrono::duration<double> duration = endTime - startTime;
 
+// Wyświetlanie wyniku
+cout << "Przyblizona liczba PI: " << pi << endl;
+cout << "Czas obliczen: " << duration.count() << " sekund" << endl;
+
+return 0;
 }
