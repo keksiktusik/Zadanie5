@@ -1,0 +1,51 @@
+# Pliki i foldery generowane przez Visual Studio
+.vs/
+*.vcxproj.user
+*.vcxproj.filters
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Tymczasowe pliki kompilacji
+Debug/
+Release/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Bb][Ii][Nn]/
+[Oo][Bb][Jj]/
+
+# Pliki automatycznie generowane przez narzędzia
+*.log
+*.tlog
+*.lastbuildstate
+*.ipch
+*.obj
+*.pch
+*.ilk
+*.idb
+*.pdb
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.log
+*.cache
+*.csproj.user
+
+# Dane testów
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Backupy systemowe i edytora
+*.bak
+*.tmp
+*.swp
+
+# Pliki systemowe
+.DS_Store
+Thumbs.db
+desktop.ini
