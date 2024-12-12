@@ -23,6 +23,15 @@ void calculatePartialIntegral(double start, double end, int steps, double stepSi
 }
 int main()
 {
-    std::cout << "Hello World!\n";
-}
+    int numThreads, numSteps;
+    cout << "Podaj liczbe wątków: ";
+    cin >> numThreads;
+    cout << "Podaj liczbe kroków (np. 100000000): ";
+    cin >> numSteps;
 
+    double stepSize = 1.0 / numSteps; // Rozmiar kroku
+    vector<thread> threads;          // Wątki
+    vector<double> partialResults(numThreads, 0.0); // Wyniki częściowe
+
+    auto startTime = chrono::high_resolution_clock::now(); // Start pomiaru czasu
+}
