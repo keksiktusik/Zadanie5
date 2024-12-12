@@ -4,6 +4,7 @@
 #include <functional>
 #include <chrono>
 #include <cmath>
+#include <fstream>
 
 using namespace std;
 
@@ -23,44 +24,58 @@ void calculatePartialIntegral(double start, double end, int steps, double stepSi
 }
 int main()
 {
-    int numThreads, numSteps;
-    cout << "Podaj liczbe wątków: ";
-    cin >> numThreads;
-    cout << "Podaj liczbe kroków (np. 100000000): ";
-    cin >> numSteps;
+    // Parametry testowe
+    vector<long long> stepCounts = { 100000000, 1000000000, 3000000000 }; // Liczby podziałów
+    int maxThreads = 50; // Maksymalna liczba wątków
 
-    double stepSize = 1.0 / numSteps; // Rozmiar kroku
-    vector<thread> threads;          // Wątki
-    vector<double> partialResults(numThreads, 0.0); // Wyniki częściowe
+    // Otwórz plik do zapisu wyników
+    ofstream outputFile("results.csv");
+    outputFile << "Liczba krokow,Liczba watków,Czas (s),Przyblizona liczba PI\n";
 
-    auto startTime = chrono::high_resolution_clock::now(); // Start pomiaru czasu
+    // Iteracja przez liczby kroków
+    for (long long steps : stepCounts) {
+        double stepSize = 1.0 / steps;
 
+        // Iteracja przez liczbę wątków
+        for (int numThreads = 1; numThreads <= maxThreads; ++numThreads) {
+            vector<thread> threads;
+            vector<double> partialResults(numThreads, 0.0);
 
-// Podział pracy na wątki
-int stepsPerThread = numSteps / numThreads;
-for (int i = 0; i < numThreads; ++i) {
-    double start = i * stepsPerThread * stepSize;
-    double end = (i + 1) * stepsPerThread * stepSize;
-    threads.emplace_back(calculatePartialIntegral, start, end, stepsPerThread, stepSize, ref(partialResults[i]));
-}
+            auto startTime = chrono::high_resolution_clock::now(); // Start pomiaru czasu
 
-// Czekanie na zakończenie wszystkich wątków
-for (auto& t : threads) {
-    t.join();
-}
+            // Podział pracy na wątki
+            long long stepsPerThread = steps / numThreads;
+            for (int i = 0; i < numThreads; ++i) {
+                double start = i * stepsPerThread * stepSize;
+                double end = (i + 1) * stepsPerThread * stepSize;
+                threads.emplace_back(calculatePartialIntegral, start, end, stepsPerThread, stepSize, ref(partialResults[i]));
+            }
 
-// Sumowanie wyników częściowych
-double pi = 0.0;
-for (double result : partialResults) {
-    pi += result;
-}
+            // Czekanie na zakończenie wszystkich wątków
+            for (auto& t : threads) {
+                t.join();
+            }
 
-auto endTime = chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
-chrono::duration<double> duration = endTime - startTime;
+            // Sumowanie wyników częściowych
+            double pi = 0.0;
+            for (double result : partialResults) {
+                pi += result;
+            }
 
-// Wyświetlanie wyniku
-cout << "Przyblizona liczba PI: " << pi << endl;
-cout << "Czas obliczen: " << duration.count() << " sekund" << endl;
+            auto endTime = chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+            chrono::duration<double> duration = endTime - startTime;
 
-return 0;
+            // Zapis wyników do pliku
+            outputFile << steps << "," << numThreads << "," << duration.count() << "," << pi << "\n";
+
+            // Wyświetlanie informacji na konsoli (opcjonalne)
+            cout << "Liczba kroków: " << steps << ", Wątki: " << numThreads
+                << ", Czas: " << duration.count() << "s, PI: " << pi << endl;
+        }
+    }
+
+    outputFile.close(); // Zamknij plik
+    cout << "Wyniki zapisane do pliku results.csv" << endl;
+
+    return 0;
 }
