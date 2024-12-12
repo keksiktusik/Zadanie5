@@ -21,7 +21,7 @@ void calculatePartialIntegral(double start, double end, int steps, double stepSi
     }
     result = sum;
 }
-int main()
+int main(){
 {
     int numThreads, numSteps;
     cout << "Podaj liczbe wątków: ";
@@ -42,4 +42,10 @@ for (int i = 0; i < numThreads; ++i) {
     double start = i * stepsPerThread * stepSize;
     double end = (i + 1) * stepsPerThread * stepSize;
     threads.emplace_back(calculatePartialIntegral, start, end, stepsPerThread, stepSize, ref(partialResults[i]));
+}
+
+// Czekanie na zakończenie wszystkich wątków
+for (auto& t : threads) {
+    t.join();
+}
 }
