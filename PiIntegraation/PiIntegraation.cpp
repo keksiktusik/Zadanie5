@@ -48,4 +48,14 @@ for (int i = 0; i < numThreads; ++i) {
 for (auto& t : threads) {
     t.join();
 }
+
+// Sumowanie wyników częściowych
+double pi = 0.0;
+for (double result : partialResults) {
+    pi += result;
+}
+
+auto endTime = chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+chrono::duration<double> duration = endTime - startTime;
+
 }
