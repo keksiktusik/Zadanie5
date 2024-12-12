@@ -35,3 +35,11 @@ int main()
 
     auto startTime = chrono::high_resolution_clock::now(); // Start pomiaru czasu
 }
+
+// Podział pracy na wątki
+int stepsPerThread = numSteps / numThreads;
+for (int i = 0; i < numThreads; ++i) {
+    double start = i * stepsPerThread * stepSize;
+    double end = (i + 1) * stepsPerThread * stepSize;
+    threads.emplace_back(calculatePartialIntegral, start, end, stepsPerThread, stepSize, ref(partialResults[i]));
+}
