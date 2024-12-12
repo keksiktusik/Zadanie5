@@ -21,7 +21,7 @@ void calculatePartialIntegral(double start, double end, int steps, double stepSi
     }
     result = sum;
 }
-int main(){
+int main()
 {
     int numThreads, numSteps;
     cout << "Podaj liczbe wątków: ";
@@ -34,7 +34,7 @@ int main(){
     vector<double> partialResults(numThreads, 0.0); // Wyniki częściowe
 
     auto startTime = chrono::high_resolution_clock::now(); // Start pomiaru czasu
-}
+
 
 // Podział pracy na wątki
 int stepsPerThread = numSteps / numThreads;
