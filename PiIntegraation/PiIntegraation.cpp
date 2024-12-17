@@ -50,22 +50,36 @@ void calculatePartialIntegral(double start, double end, int steps, double stepSi
     }
     result = sum;
 }
+
+/**
+ * @brief Funkcja główna programu.
+ *
+ * Użytkownik podaje liczbę wątków i liczbę kroków. Program dzieli obliczenia
+ * na wiele wątków, wykonuje je równolegle, sumuje wyniki częściowe i mierzy czas.
+ *
+ * @return Zwraca 0, jeśli program zakończy się poprawnie.
+ */
+
 int main()
 {
-    int numThreads, numSteps;
+    int numThreads, numSteps; /**< Liczba wątków oraz kroków podana przez użytkownika. */
     cout << "Podaj liczbe wątków: ";
     cin >> numThreads;
     cout << "Podaj liczbe kroków (np. 100000000): ";
     cin >> numSteps;
 
-    double stepSize = 1.0 / numSteps; // Rozmiar kroku
-    vector<thread> threads;          // Wątki
-    vector<double> partialResults(numThreads, 0.0); // Wyniki częściowe
+    double stepSize = 1.0 / numSteps; /**< Rozmiar pojedynczego kroku. */
+    vector<thread> threads;          /**< Wektor przechowujący wątki. */
+    vector<double> partialResults(numThreads, 0.0); /**< Wektor wyników częściowych. */
 
-    auto startTime = chrono::high_resolution_clock::now(); // Start pomiaru czasu
+    auto startTime = chrono::high_resolution_clock::now(); /**< Start pomiaru czasu. */
 
+    /**
+         * @brief Podział pracy na wątki.
+         *
+         * Dzieli liczbę kroków pomiędzy wątki i uruchamia funkcję obliczającą całkę.
+         */
 
-// Podział pracy na wątki
 int stepsPerThread = numSteps / numThreads;
 for (int i = 0; i < numThreads; ++i) {
     double start = i * stepsPerThread * stepSize;
