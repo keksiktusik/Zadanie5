@@ -5,6 +5,7 @@
 #include <chrono>
 #include <cmath>
 #include <fstream>
+#include <atomic>
 
 using namespace std;
 
@@ -14,14 +15,15 @@ double f(double x) {
 }
 
 // Funkcja obliczająca całkę na zadanym przedziale
-void calculatePartialIntegral(double start, double end, int steps, double stepSize, double& result) {
+void calculatePartialIntegral(double start, double end, long long steps, double stepSize, double& result) {
     double sum = 0.0;
-    for (int i = 0; i < steps; ++i) {
+    for (long long i = 0; i < steps; ++i) {
         double x = start + i * stepSize + stepSize / 2.0; // Środek prostokąta
         sum += f(x) * stepSize;
     }
     result = sum;
 }
+
 int main()
 {
     // Parametry testowe
@@ -34,7 +36,7 @@ int main()
 
     // Iteracja przez liczby kroków
     for (long long steps : stepCounts) {
-        double stepSize = 1.0 / steps;
+        double stepSize = 1.0 / static_cast<double>(steps);
 
         // Iteracja przez liczbę wątków
         for (int numThreads = 1; numThreads <= maxThreads; ++numThreads) {
