@@ -87,21 +87,29 @@ for (int i = 0; i < numThreads; ++i) {
     threads.emplace_back(calculatePartialIntegral, start, end, stepsPerThread, stepSize, ref(partialResults[i]));
 }
 
-// Czekanie na zakończenie wszystkich wątków
+/**
+     * @brief Czekanie na zakończenie wszystkich wątków.
+     */
 for (auto& t : threads) {
     t.join();
 }
 
-// Sumowanie wyników częściowych
+/**
+     * @brief Sumowanie wyników częściowych.
+     */
+
 double pi = 0.0;
 for (double result : partialResults) {
     pi += result;
 }
 
-auto endTime = chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
-chrono::duration<double> duration = endTime - startTime;
+auto endTime = chrono::high_resolution_clock::now(); /**< Koniec pomiaru czasu. */
+chrono::duration<double> duration = endTime - startTime; /**< Obliczenie czasu wykonania. */
 
-// Wyświetlanie wyniku
+/**
+     * @brief Wyświetlanie wyniku oraz czasu obliczeń.
+     */
+
 cout << "Przyblizona liczba PI: " << pi << endl;
 cout << "Czas obliczen: " << duration.count() << " sekund" << endl;
 
