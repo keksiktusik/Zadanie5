@@ -1,4 +1,12 @@
-﻿#include <iostream>
+﻿/**
+ * @file pi_calculation.cpp
+ * @brief Program do obliczania przybliżonej wartości liczby PI metodą całkowania numerycznego.
+ *
+ * Program wykorzystuje zrównoleglenie obliczeń za pomocą biblioteki <thread>.
+ * Użytkownik podaje liczbę kroków oraz liczbę wątków. Program oblicza wartość liczby PI
+ * oraz mierzy czas wykonania obliczeń.
+ */
+#include <iostream>
 #include <thread>
 #include <vector>
 #include <functional>
@@ -7,12 +15,33 @@
 
 using namespace std;
 
-// Funkcja do obliczania wartości funkcji f(x) = 4 / (1 + x^2)
+/**
+ * @brief Funkcja matematyczna obliczająca wartość 4 / (1 + x^2).
+ *
+ * Jest to funkcja podcałkowa używana w metodzie całkowania numerycznego
+ * do przybliżania wartości liczby PI.
+ *
+ * @param x Wartość zmiennej niezależnej.
+ * @return Wynik funkcji f(x) = 4 / (1 + x^2).
+ */
+
 double f(double x) {
     return 4.0 / (1.0 + x * x);
 }
 
-// Funkcja obliczająca całkę na zadanym przedziale
+/**
+ * @brief Funkcja obliczająca całkę oznaczoną na zadanym przedziale.
+ *
+ * Funkcja dzieli przedział na równe części (kroki) i oblicza sumę
+ * pól prostokątów o wysokościach wyznaczonych przez funkcję f(x).
+ *
+ * @param start Początek przedziału.
+ * @param end Koniec przedziału.
+ * @param steps Liczba kroków na przedziale.
+ * @param stepSize Rozmiar pojedynczego kroku.
+ * @param result Zmienna referencyjna do zapisania wyniku częściowego.
+ */
+
 void calculatePartialIntegral(double start, double end, int steps, double stepSize, double& result) {
     double sum = 0.0;
     for (int i = 0; i < steps; ++i) {
