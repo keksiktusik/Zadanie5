@@ -1,0 +1,162 @@
+\doxysection{Pi\+Integraation.\+cpp File Reference}
+\hypertarget{_pi_integraation_8cpp}{}\label{_pi_integraation_8cpp}\index{PiIntegraation.cpp@{PiIntegraation.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{_pi_integraation_8cpp_a3de2b7b41a8e4b07da05298510d17ed2}{f}} (double x)
+\begin{DoxyCompactList}\small\item\em Funkcja obliczająca wartość funkcji ( f(x) = \textbackslash{}frac\{4\}\{1 + x\texorpdfstring{$^\wedge$}{\string^}2\} ). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_pi_integraation_8cpp_a5c00ae59c1f83ca76acc893b148cf414}{calculate\+Partial\+Integral}} (double start, double end, long long steps, double step\+Size, double \&result)
+\begin{DoxyCompactList}\small\item\em Funkcja obliczająca wartość całki w zadanym przedziale metodą prostokątów. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_pi_integraation_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja główna programu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_pi_integraation_8cpp_a5c00ae59c1f83ca76acc893b148cf414}\index{PiIntegraation.cpp@{PiIntegraation.cpp}!calculatePartialIntegral@{calculatePartialIntegral}}
+\index{calculatePartialIntegral@{calculatePartialIntegral}!PiIntegraation.cpp@{PiIntegraation.cpp}}
+\doxysubsubsection{\texorpdfstring{calculatePartialIntegral()}{calculatePartialIntegral()}}
+{\footnotesize\ttfamily \label{_pi_integraation_8cpp_a5c00ae59c1f83ca76acc893b148cf414} 
+void calculate\+Partial\+Integral (\begin{DoxyParamCaption}\item[{double}]{start}{, }\item[{double}]{end}{, }\item[{long long}]{steps}{, }\item[{double}]{step\+Size}{, }\item[{double \&}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Funkcja obliczająca wartość całki w zadanym przedziale metodą prostokątów. 
+
+Funkcja wykorzystuje metodę prostokątów, aby przybliżyć wartość całki funkcji ( f(x) ) na zadanym przedziale {\ttfamily }\mbox{[}start, end\mbox{]}. Całkowity przedział całkowania jest dzielony na {\ttfamily steps} równych części, a wynik z każdej części jest sumowany.
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & Początek przedziału całkowania. \\
+\hline
+{\em end} & Koniec przedziału całkowania. \\
+\hline
+{\em steps} & Liczba kroków podziału w przedziale. Większa liczba kroków zwiększa dokładność. \\
+\hline
+{\em step\+Size} & Rozmiar jednego kroku (delta x). Określa szerokość prostokąta. \\
+\hline
+{\em result} & Zmienna wynikowa, do której zapisany zostanie wynik obliczeń.\\
+\hline
+\end{DoxyParams}
+\hypertarget{_pi_integraation_8cpp_autotoc_md1}{}\doxysubsubsubsection{\texorpdfstring{Wyjaśnienie działania\+:}{Wyjaśnienie działania\+:}}\label{_pi_integraation_8cpp_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Każdy krok reprezentuje prostokąt, którego szerokość to {\ttfamily step\+Size}, a wysokość to wartość funkcji ( f(x) ) w środku tego prostokąta.
+\item Wynik dla danego prostokąta jest obliczany jako ( f(x) \textbackslash{}times \textbackslash{}text\{step\+Size\} ), a wszystkie wyniki są sumowane w zmiennej {\ttfamily result}. 
+\end{DoxyItemize}\texorpdfstring{$<$}{<} Suma wartości prostokątów w przedziale.
+
+\texorpdfstring{$<$}{<} Środek prostokąta w bieżącym kroku.
+
+\texorpdfstring{$<$}{<} Dodanie pola prostokąta do sumy.
+
+\texorpdfstring{$<$}{<} Zapisanie wyniku całkowania w przedziale do zmiennej {\ttfamily result}.\Hypertarget{_pi_integraation_8cpp_a3de2b7b41a8e4b07da05298510d17ed2}\index{PiIntegraation.cpp@{PiIntegraation.cpp}!f@{f}}
+\index{f@{f}!PiIntegraation.cpp@{PiIntegraation.cpp}}
+\doxysubsubsection{\texorpdfstring{f()}{f()}}
+{\footnotesize\ttfamily \label{_pi_integraation_8cpp_a3de2b7b41a8e4b07da05298510d17ed2} 
+double f (\begin{DoxyParamCaption}\item[{double}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Funkcja obliczająca wartość funkcji ( f(x) = \textbackslash{}frac\{4\}\{1 + x\texorpdfstring{$^\wedge$}{\string^}2\} ). 
+
+Funkcja ta jest kluczowa w obliczaniu liczby PI metodą całkowania numerycznego. Reprezentuje funkcję, której całka w granicach \mbox{[}0, 1\mbox{]} daje wartość liczby PI.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Punkt, w którym funkcja ma zostać obliczona. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Wartość funkcji ( f(x) ) w punkcie {\ttfamily x}.
+\end{DoxyReturn}
+\hypertarget{_pi_integraation_8cpp_autotoc_md0}{}\doxysubsubsubsection{\texorpdfstring{Wyjaśnienie\+:}{Wyjaśnienie\+:}}\label{_pi_integraation_8cpp_autotoc_md0}
+Funkcja ( f(x) = \textbackslash{}frac\{4\}\{1 + x\texorpdfstring{$^\wedge$}{\string^}2\} ) pochodzi z przekształcenia równania koła ( x\texorpdfstring{$^\wedge$}{\string^}2 + y\texorpdfstring{$^\wedge$}{\string^}2 = 1 ). Wynik integracji tej funkcji w zakresie od 0 do 1 równa się liczbie PI. \Hypertarget{_pi_integraation_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{PiIntegraation.cpp@{PiIntegraation.cpp}!main@{main}}
+\index{main@{main}!PiIntegraation.cpp@{PiIntegraation.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{_pi_integraation_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Funkcja główna programu. 
+
+Funkcja sterująca, która wykonuje obliczenia liczby PI metodą całkowania numerycznego dla różnych konfiguracji liczby wątków i kroków. Program obsługuje wielowątkowość, dzieląc obliczenia na równoległe fragmenty, aby przyspieszyć działanie. Wyniki są zapisywane w pliku CSV, co pozwala na analizę wpływu liczby wątków i kroków na wydajność.
+
+\begin{DoxyReturn}{Returns}
+Zwraca 0, jeśli program zakończył się poprawnie.
+\end{DoxyReturn}
+\hypertarget{_pi_integraation_8cpp_autotoc_md2}{}\doxysubsubsubsection{\texorpdfstring{Wyjaśnienie\+:}{Wyjaśnienie\+:}}\label{_pi_integraation_8cpp_autotoc_md2}
+
+\begin{DoxyItemize}
+\item Funkcja iteruje przez różne liczby kroków (dokładności obliczeń) oraz różne liczby wątków (poziomy równoległości).
+\item Dla każdej kombinacji liczby kroków i wątków, funkcja\+:
+\begin{DoxyItemize}
+\item Dzieli zakres obliczeń między wątki.
+\item Uruchamia wątki do równoległego obliczania wartości całki.
+\item Sumuje wyniki z poszczególnych wątków.
+\item Zapisuje wyniki do pliku CSV. 
+\end{DoxyItemize}
+\end{DoxyItemize}\texorpdfstring{$<$}{<} Liczby podziałów (ilość kroków dla całkowania).
+
+\texorpdfstring{$<$}{<} Maksymalna liczba wątków do testowania równoległych obliczeń.
+
+\texorpdfstring{$<$}{<} Strumień do zapisu wyników w pliku CSV.
+
+\texorpdfstring{$<$}{<} Kod błędu w przypadku niepowodzenia otwarcia pliku.
+
+\texorpdfstring{$<$}{<} Nagłówek pliku CSV.
+
+Długość jednego kroku (delta x).
+
+Dla danego kroku całkowania obliczana jest szerokość prostokąta jako ( \textbackslash{}text\{step\+Size\} = \textbackslash{}frac\{1\}\{\textbackslash{}text\{steps\}\} ).
+
+\texorpdfstring{$<$}{<} Wektor przechowujący obiekty wątków.
+
+\texorpdfstring{$<$}{<} Wyniki obliczeń dla poszczególnych wątków.
+
+Rejestracja czasu rozpoczęcia obliczeń.
+
+Używane do pomiaru wydajności dla każdej konfiguracji liczby kroków i wątków.
+
+Liczba kroków przypadających na każdy wątek.
+
+Całkowity zakres obliczeń {\ttfamily steps} jest dzielony równomiernie na wątki.
+
+Początek i koniec zakresu dla bieżącego wątku.
+
+Każdy wątek obsługuje inny podprzedział całkowania, obliczany na podstawie numeru wątku i {\ttfamily steps\+Per\+Thread}.
+
+Synchronizacja wątków.
+
+Program czeka, aż wszystkie wątki zakończą swoje obliczenia, zanim przejdzie do kolejnych kroków.
+
+Przybliżona wartość liczby PI.
+
+Wynik obliczeń dla danego zestawu parametrów (liczby kroków i wątków). Sumowane są wyniki częściowe z każdego wątku.
+
+\texorpdfstring{$<$}{<} Czas trwania obliczeń.
+
+Zapis wyników do pliku.
+
+Dla każdej kombinacji liczby kroków i wątków zapisane są\+:
+\begin{DoxyItemize}
+\item Liczba kroków całkowania.
+\item Liczba wątków użytych w obliczeniach.
+\item Czas trwania obliczeń w sekundach.
+\item Przybliżona wartość liczby PI.
+\end{DoxyItemize}
+
+Wyświetlanie wyników na konsoli.
+
+Wyniki obliczeń są również wyświetlane w konsoli, co pozwala użytkownikowi śledzić postęp działania programu.
+
+Zamykanie pliku CSV.
+
+Plik wyników jest zamykany po zapisaniu wszystkich danych, aby upewnić się, że dane zostały prawidłowo zapisane i zwolnić zasoby.
+
+\texorpdfstring{$<$}{<} Zwraca 0, jeśli program zakończył się poprawnie.
